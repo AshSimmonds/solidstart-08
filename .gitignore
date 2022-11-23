@@ -24,3 +24,4 @@ Thumbs.db
 
 .env
 prisma/db.sqlite
+db.sqlite
