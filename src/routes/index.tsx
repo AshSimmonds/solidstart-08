@@ -1,24 +1,24 @@
-import { type ParentComponent, Switch, Match } from "solid-js";
-import { Title, useRouteData } from "solid-start";
-import { trpc } from "~/utils/trpc";
-import { createServerData$ } from "solid-start/server";
-import { authenticator } from "~/server/auth";
-import { authClient } from "~/utils/auth";
+import { type ParentComponent, Switch, Match } from "solid-js"
+import { Title, useRouteData } from "solid-start"
+import { trpc } from "~/utils/trpc"
+import { createServerData$ } from "solid-start/server"
+import { authenticator } from "~/server/auth"
+import { authClient } from "~/utils/auth"
 
 export const routeData = () => {
     return createServerData$(async (_, { request }) => {
-        const user = await authenticator.isAuthenticated(request);
-        return user;
-    });
-};
+        const user = await authenticator.isAuthenticated(request)
+        return user
+    })
+}
 
 const Home: ParentComponent = () => {
-    const user = useRouteData<typeof routeData>();
-    const res = trpc.secret.useQuery(undefined, {
+    const user = useRouteData<typeof routeData>()
+    const res = trpc.example.secret.useQuery(undefined, {
         get enabled() {
-            return !!user();
+            return !!user()
         },
-    });
+    })
 
     return (
         <>
@@ -70,7 +70,7 @@ const Home: ParentComponent = () => {
                 </Switch>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

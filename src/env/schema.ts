@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod"
 
 export const serverScheme = z.object({
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
@@ -7,9 +7,12 @@ export const serverScheme = z.object({
     SITE_URL: z.string(),
     DISCORD_CLIENT_ID: z.string(),
     DISCORD_CLIENT_SECRET: z.string(),
-});
+    AIRTABLE_API_KEY: z.string(),
+    AIRTABLE_BASE_ID: z.string(),
+    XATA_API_KEY: z.string(),
+})
 
 export const clientScheme = z.object({
     MODE: z.enum(['development', 'production', 'test']).default('development'),
     VITE_SESSION_SECRET: z.string(),
-});
+})
