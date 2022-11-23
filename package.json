@@ -11,6 +11,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.8",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "autoprefixer": "^10.4.13",
@@ -31,6 +32,7 @@
     "@tanstack/solid-query": "^4.15.1",
     "@trpc/client": "^10.1.0",
     "@trpc/server": "^10.1.0",
+    "daisyui": "^2.41.0",
     "dotenv": "^16.0.3",
     "solid-js": "^1.5.7",
     "solid-start": "^0.2.1",
