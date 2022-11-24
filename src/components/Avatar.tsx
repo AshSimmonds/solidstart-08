@@ -2,7 +2,7 @@ import { Switch, Match } from "solid-js";
 import { createServerData$ } from "solid-start/server";
 import { authenticator } from "~/server/auth";
 
-const userObjectPromise = () => {
+export const userObjectPromise = () => {
     return createServerData$(async (_, { request }) => {
         const user = await authenticator.isAuthenticated(request)
         return user
