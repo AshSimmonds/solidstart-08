@@ -1,9 +1,10 @@
 import { A } from "solid-start";
+import Layout from "~/components/Layout";
 import PageTitle from "~/components/PageTitle";
 
 export default function TypographyIndexPage() {
     return (
-        <div>
+        <Layout>
             <PageTitle>Typography and styling resources</PageTitle>
             <h1>Typography and styling resources</h1>
 
@@ -45,7 +46,7 @@ export default function TypographyIndexPage() {
                 >Shuffle (whole page/site builder)</a
                 >
             </div>
-        </div>
+        </Layout>
 
     )
 }

@@ -1,8 +1,9 @@
+import Layout from "~/components/Layout";
 import PageTitle from "~/components/PageTitle";
 
 export default function BlankPage() {
     return (
-        <>
+        <Layout>
             <PageTitle>Blank</PageTitle>
             <h1>Empty</h1>
 
@@ -15,6 +16,6 @@ export default function BlankPage() {
                 </div>
 
             </div>
-        </>
+        </Layout>
     )
 }

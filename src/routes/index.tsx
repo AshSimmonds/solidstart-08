@@ -4,6 +4,7 @@ import { trpc } from "~/utils/trpc"
 import { createServerData$ } from "solid-start/server"
 import { authenticator } from "~/server/auth"
 import { authClient } from "~/utils/auth"
+import Layout from "~/components/Layout"
 
 export const routeData = () => {
     return createServerData$(async (_, { request }) => {
@@ -21,7 +22,7 @@ const Home: ParentComponent = () => {
     })
 
     return (
-        <>
+        <Layout>
             <Title>Home</Title>
             <div>
                 <Switch
@@ -69,7 +70,7 @@ const Home: ParentComponent = () => {
                     </Match>
                 </Switch>
             </div>
-        </>
+        </Layout>
     )
 }
 

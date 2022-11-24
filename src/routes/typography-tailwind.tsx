@@ -1,11 +1,12 @@
 // TODO: figure out if css can be embedded in the page itself, this is only 1 line which applies only on typography example pages
 // import "../styles/typography.module.css"
 
+import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
 
 export default function TypographyHtmlPage() {
     return (
-        <div>
+        <Layout>
             <PageTitle>Typography TailwindCSS</PageTitle>
 
             <p class="alert alert-warning" >
@@ -1188,7 +1189,7 @@ export default function TypographyHtmlPage() {
                 </div>
             </div>
 
-        </div>
+        </Layout>
     )
 }
 

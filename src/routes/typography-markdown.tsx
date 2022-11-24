@@ -1,8 +1,9 @@
+import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
 
 export default function TypographyHtmlPage() {
   return (
-    <div>
+    <Layout>
       <PageTitle>Typography Markdown</PageTitle>
       <p class="alert alert-warning">TODO: install some markdown parser</p>
 
@@ -128,6 +129,6 @@ export default function TypographyHtmlPage() {
 
       X^2^
 
-    </div>
+    </Layout>
   )
 }

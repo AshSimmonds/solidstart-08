@@ -3,6 +3,7 @@ import { createServerData$ } from "solid-start/server"
 import { authenticator } from "~/server/auth"
 import { useRouteData } from "solid-start"
 import { Match, Switch } from "solid-js"
+import Layout from "~/components/Layout"
 
 export const routeData = () => {
     return createServerData$(async (_, { request }) => {
@@ -15,7 +16,7 @@ export default function ProtectedPage() {
     const user = useRouteData<typeof routeData>();
 
     return (
-        <>
+        <Layout>
             <PageTitle>Protected page</PageTitle>
             <h1>Protected page - minimum code needed</h1>
 
@@ -34,6 +35,6 @@ export default function ProtectedPage() {
                 </Match>
             </Switch>
 
-        </>
+        </Layout>
     )
 }
