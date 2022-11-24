@@ -18,7 +18,7 @@ export default function Root() {
     return (
         <Html lang="en">
             <Head>
-                <Title>SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind Upstash Ratelimit Meta Auth0</Title>
+                <Title>SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</Title>
                 <Meta charset="utf-8" />
                 <Meta name="viewport" content="width=device-width, initial-scale=1" />
 
