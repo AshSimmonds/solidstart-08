@@ -19,6 +19,12 @@ export default function DrakonPage() {
 
             <A href="/drakon/" class="btn btn-accent">/drakon/</A>
 
+            <h2>TODO: complete this</h2>
+
+            <div>
+                Too complex to get working straight up, bigger flowcharts to fry...
+            </div>
+
         </Layout>
     )
 }
