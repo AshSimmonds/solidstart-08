@@ -71,6 +71,11 @@ const buttonList = [
         "buttonLink": "/blank",
         "colorClass": "disabled"
     },
+    {
+        "buttonText": "DRAKON (info)",
+        "buttonLink": "/drakon",
+        "colorClass": "info"
+    },
 ]
 
 
