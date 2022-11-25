@@ -27,54 +27,59 @@ const buttonList = [
         "colorClass": ""
     },
     {
-        "buttonText": "Stuff (neutral)",
+        "buttonText": "Stuff",
         "buttonLink": "/asdf",
         "colorClass": "neutral"
     },
     {
-        "buttonText": "Profile (primary)",
+        "buttonText": "Profile",
         "buttonLink": "/profile",
         "colorClass": "primary"
     },
     {
-        "buttonText": "Typography (secondary)",
+        "buttonText": "Typography",
         "buttonLink": "/typography",
         "colorClass": "secondary"
     },
     {
-        "buttonText": "XCOM (accent)",
+        "buttonText": "XCOM",
         "buttonLink": "/xcom",
         "colorClass": "accent"
     },
     {
-        "buttonText": "Access (info)",
+        "buttonText": "Access",
         "buttonLink": "/access",
         "colorClass": "info"
     },
     {
-        "buttonText": "Vercel (success)",
+        "buttonText": "Vercel",
         "buttonLink": "https://vercel.com/ashsimmonds/solidstart-05",
         "colorClass": "success"
     },
     {
-        "buttonText": "Gluntify (warning)",
-        "buttonLink": "/gluntify",
+        "buttonText": "Gruntify",
+        "buttonLink": "/gruntify",
         "colorClass": "warning"
     },
     {
-        "buttonText": "Xata (error)",
+        "buttonText": "Xata",
         "buttonLink": "/xata",
         "colorClass": "error"
     },
     {
-        "buttonText": "Blank (disabled)",
+        "buttonText": "Blank",
         "buttonLink": "/blank",
         "colorClass": "disabled"
     },
     {
-        "buttonText": "DRAKON (info)",
+        "buttonText": "DRAKON",
         "buttonLink": "/drakon",
         "colorClass": "info"
+    },
+    {
+        "buttonText": "Saber Astronautics",
+        "buttonLink": "/saber",
+        "colorClass": "warning"
     },
 ]
 
@@ -89,8 +94,8 @@ const Home: ParentComponent = () => {
         // <Layout>
             <div class="flex flex-col items-center justify-center mx-auto p-4">
 
-                <Title>SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</Title>
-                <h1>SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</h1>
+                <Title>Blue Dwarf dot Space | SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</Title>
+                {/* <h1>SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</h1> */}
 
                 <div class="bg-base-100 p-12">
                     <img src={`/moonlogo_small.png`} alt="Blue Dwarf Space logo" class="mx-auto w-full sm:w-1/3 md:w-2/3" />
