@@ -80,9 +80,7 @@ function HeaderLinks(props: any) {
     return (
 
         <ul tabIndex={0} class={props.listClass} >
-            <li><A href="/asdf">Stuff</A></li>
             <li><A href="/typography">Typo</A></li>
-            <li><A href="/blank">Empty</A></li>
             {/* <li tabIndex={0}>
             <Link href="/linktwo">
                 Parent
