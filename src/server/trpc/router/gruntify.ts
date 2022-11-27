@@ -38,25 +38,61 @@ export default router({
 
 
 
-    getOne: procedurePublic
+    getOneFullRow: procedurePublic
         .input(z.object({
             permitId: z.string()
         }))
         .query(({ ctx, input }) => {
 
-            const permitObject = _fetchFromAirtable(input.permitId)
-                .then((permitObject: any) => {
+            const rowObject = _fetchFromAirtable(input.permitId)
+                .then((rowObject: any) => {
 
-                    // console.log(`getOne permitObject: ${JSON.stringify(permitObject, null, 4)}`)
-
-                    return permitObject
+                    return rowObject
                 })
                 .catch((error: any) => {
-                    console.log(`getOne error: ${error}`)
+                    console.log(`getOneFullRow error: ${error}`)
                 })
 
-            return permitObject
+            return rowObject
         }),
+
+    getOneGruntify: procedurePublic
+        .input(z.object({
+            permitId: z.string()
+        }))
+        .query(async ({ ctx, input }) => {
+
+            return await _fetchFromAirtable(input.permitId)
+                .then((rowObject: any) => {
+
+                    console.log(`getOneGruntify rowObject: ${typeof (rowObject)}`)
+
+                    const gruntifyString = rowObject.gruntify
+
+                    const gruntifyStartPosition = gruntifyString.indexOf('{')
+                    const gruntifyEndPosition = gruntifyString.lastIndexOf('}') + 1
+
+                    const gruntifyJson = JSON.parse(gruntifyString.substring(gruntifyStartPosition, gruntifyEndPosition))
+
+                    console.log(`getOneGruntify gruntifyJson: ${typeof (gruntifyJson)}`)
+
+
+                    return gruntifyJson
+                })
+                .catch((error: any) => {
+                    console.log(`getOneGruntify error: ${error}`)
+                })
+
+            // console.log(`rowObject: ${JSON.stringify(rowObject.data.gruntify)}`)
+
+            // const gruntifyObject = rowObject ? rowObject.data.gruntify : null
+
+            // console.log(`getOneGruntify gruntifyData: ${gruntifyData}`)
+
+            // return 'gruntifyData'
+        }),
+
+
 })
 
 
@@ -104,7 +140,7 @@ async function _fetchFromAirtable(permitId: string | undefined = undefined) {
                 return airtableJson
             }
         }).catch((error: Error) => {
-            console.error(`gluntify.ts _fetchFromAirtable error: ${error}`)
+            console.error(`gruntify.ts _fetchFromAirtable error: ${error}`)
             return error
         })
 

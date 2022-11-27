@@ -1,5 +1,6 @@
 import { type ParentComponent, Switch, Match, Show } from "solid-js"
-import { A, Title } from "solid-start"
+import { A, Title, useRouteData } from "solid-start"
+import { createServerData$ } from "solid-start/server"
 import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
 import { trpc } from "~/utils/trpc"
@@ -11,17 +12,16 @@ const parameterObject = {
     "permitId": testXataPermitId,
 }
 
-const XataPage: ParentComponent = () => {
+// export const routeData = () => createServerData$(trpc.gruntify.getOne.useQuery(() => parameterObject))
+
+export default function XataPage() {
     // const res = trpc.hello.useQuery(() => ({ name: "from tRPC" }))
-    const thePermit = trpc.gluntify.getOne.useQuery(() => parameterObject)
 
-    // console.log(`GluntifyPage thePermit: ${JSON.stringify(thePermit, null, 4)}`)
+    const theData = trpc.gruntify.getOneFullRow.useQuery(() => parameterObject)
 
-    const gluntifyExportedSource = thePermit.data ? thePermit.data.gluntify : ''
+    const gruntifyData = trpc.gruntify.getOneGruntify.useQuery(() => parameterObject)
 
-    const gluntifyExportedJson = gluntifyExportedSource.length > 0 ? gluntifyExportedSource.substring(gluntifyExportedSource.indexOf('{'), gluntifyExportedSource.lastIndexOf('}') + 1) : 'no data'
-
-    console.log(`GluntifyPage gluntifyExportedJson: ${gluntifyExportedJson.length}`)
+    console.log(`gruntifyData: ${gruntifyData}`)
 
     return (
         <Layout>
@@ -29,36 +29,60 @@ const XataPage: ParentComponent = () => {
 
             <h1>Xata.io</h1>
 
-            <h2>gluntifyExportedSource</h2>
+            <h2>Gruntify stuff</h2>
 
             <p>
                 This is the bog standard building inspection form schema.
             </p>
 
-            <Show when={thePermit.isSuccess} fallback="Loading...">
-                <pre>
-                    {thePermit.data.gluntify ? jsonifyGluntifiedSource(thePermit.data.gluntify) : 'no data'}
-                </pre>
+            <Show when={gruntifyData} fallback="sans data">
+                <pre>{JSON.stringify(gruntifyData, null, 4)}</pre>
             </Show>
 
             <h2>Full source</h2>
             <p>
                 ...of the Airtable record, for now.
             </p>
-            {/* <Show when={thePermit}> */}
-            <pre>{JSON.stringify(thePermit, null, 4)}</pre>
-            {/* </Show> */}
+
+            <pre>{JSON.stringify(theData, null, 4)}</pre>
 
 
         </Layout>
     )
 }
 
-export default XataPage
+
+// async function gruntifyData() {
+
+//     const theData = useRouteData<typeof routeData>()
+
+//     try {
+
+//         const gruntifyStartPosition = await theData.data.gruntify.indexOf('{')
+//         const gruntifyEndPosition = await theData.data.gruntify.lastIndexOf('}') + 1
+
+//         const gruntifyString = await theData.data.gruntify.substring(gruntifyStartPosition, gruntifyEndPosition)
+
+//         console.log(`gruntifyString: ${gruntifyString}`)
+
+//         const gruntifyJson = jsonifyGruntifiedSource(gruntifyString)
+
+//         console.log(`gruntifyJson: ${JSON.stringify(gruntifyJson)}`)
+
+
+//         return undefined
+
+
+//     }
+//     catch (error) {
+//         console.log(`error: ${error}`)
+//         return error
+//     }
+// }
 
 
 
 
-function jsonifyGluntifiedSource(gluntifiedSource: string) {
-    return gluntifiedSource.substring(gluntifiedSource.indexOf('{'), gluntifiedSource.lastIndexOf('}') + 1)
-}
+// function jsonifyGruntifiedSource(gruntifiedSource: string) {
+//     return gruntifiedSource.substring(gruntifiedSource.indexOf('{'), gruntifiedSource.lastIndexOf('}') + 1)
+// }
