@@ -1,4 +1,5 @@
 import { Match, Show, Switch } from "solid-js"
+import { A } from "solid-start"
 import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
 import { trpc } from "~/utils/trpc"
@@ -30,7 +31,12 @@ export default function SaberPage() {
                 }
             >
                 <Match when={testObject.error}>
-                    <div class="alert alert-error">Error: {testObject.error?.data?.httpStatus} | {testObject.error?.data?.code} at <code>{testObject.error?.data?.path}</code></div>
+                    <div class="alert alert-error">Error: {testObject.error?.data?.httpStatus} | {testObject.error?.data?.code} at <code>{testObject.error?.data?.path}</code>
+                    <Show when={testObject.error?.data?.httpStatus === 401}>
+                        <A href="/profile" class="btn btn-secondary">Authenticate</A>
+                    </Show>
+                    
+                    </div>
                 </Match>
 
                 <Match when={testObject.isRefetching}>
