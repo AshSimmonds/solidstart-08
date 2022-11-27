@@ -16,7 +16,7 @@ const isRegistered = t.middleware(async ({ ctx, next }) => {
     return next({ ctx: { ...ctx, user } })
 })
 
-
+// TODO: do proper checks for various levels once role-based-auth is implemented
 const isPremium = isRegistered
 
 const isPower = isRegistered

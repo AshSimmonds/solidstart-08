@@ -10,6 +10,8 @@ export const serverScheme = z.object({
     AIRTABLE_API_KEY: z.string(),
     AIRTABLE_BASE_ID: z.string(),
     XATA_API_KEY: z.string(),
+    SABER_USERNAME: z.string(),
+    SABER_PASSWORD: z.string(),
 })
 
 export const clientScheme = z.object({
