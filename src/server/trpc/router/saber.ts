@@ -128,16 +128,20 @@ async function _getTle() {
 
         const data = await response.json()
 
-        console.log(`SERVER saber.ts _getTle data: ${data}`)
+        if (response.status !== 200) {
+            throw new Error(`saber.ts _getTle() response status: ${response.status}`)
+        }
+
+        console.log(`SERVER saber.ts _getTle() data: ${JSON.stringify(data, null, 4)}`)
 
         return data
 
     } catch (error) {
-        console.log(`SERVER saber.ts _getTle error: ${error}`)
+        console.log(`SERVER saber.ts _getTle() error: ${error}`)
 
         return new TRPCError({
             code: "BAD_REQUEST",
-            message: `SERVER saber.ts _getTle error: ${error}`,
+            message: `SERVER saber.ts _getTle() error: ${error}`,
         })
     }
 
