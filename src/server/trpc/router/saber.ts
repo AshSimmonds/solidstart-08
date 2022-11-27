@@ -1,6 +1,7 @@
 import { z } from "zod"
 import { procedurePublic, procedureRegistered, router } from "../utils"
 import { serverEnv } from "~/env/server"
+import { TRPCError } from "@trpc/server"
 
 const saberUsername = serverEnv.SABER_USERNAME
 const saberPassword = serverEnv.SABER_PASSWORD
@@ -8,7 +9,7 @@ const saberPassword = serverEnv.SABER_PASSWORD
 const saberApiUrl = 'https://saberdata.space/'
 const saberApiLoginUrl = saberApiUrl + 'login'
 const saberApiRefreshUrl = saberApiUrl + 'refresh'
-const saberApiTleUrl = saberApiUrl + 'tle'
+const saberApiSatelliteUrl = saberApiUrl + 'tle'
 const saberApiSpaceWeatherUrl = saberApiUrl + 'spwx'
 const saberApiSpaceStomrUrl = saberApiSpaceWeatherUrl + 'status'
 
@@ -23,9 +24,9 @@ export default router({
     // }),
 
     // getTle: procedureRegistered.query(() => {
-    getTle: procedureRegistered.query(() => {
-        const tle = _getTle()
-        return tle
+    getSatellites: procedureRegistered.query(() => {
+        const satellites = _getTle()
+        return satellites
     }),
 
 })
@@ -41,6 +42,8 @@ export default router({
 
 
 async function _getToken() {
+
+    console.log(`saber.ts _getToken() currentToken: ${currentToken}`)
 
     if (currentToken) {
         return currentToken
@@ -73,7 +76,7 @@ async function _getToken() {
 
         const data = await response.json()
 
-        console.log(`SERVER saber.ts _getToken data: ${data}`)
+        // console.log(`SERVER saber.ts _getToken data: ${data}`)
 
         const newToken = data.access_token
 
@@ -87,7 +90,10 @@ async function _getToken() {
     } catch (error) {
         console.log(`SERVER saber.ts _getToken error: ${error}`)
 
-        return new Error(`SERVER saber.ts _getToken error: ${error}`)
+        return new TRPCError({
+            code: "BAD_REQUEST",
+            message: `SERVER saber.ts _getToken error: ${error}`,
+        })
     }
 
 }
@@ -104,10 +110,10 @@ async function _getTle() {
 
         const token = await _getToken()
 
-        console.log (`SERVER saber.ts _getTle token: ${token}`)
+        // console.log(`SERVER saber.ts _getTle token: ${token}`)
 
         if (!token) {
-            return
+            throw new Error(`saber.ts _getTle() token not found`)
         }
 
         const headersList = {
@@ -115,12 +121,12 @@ async function _getTle() {
             "Authorization": `Bearer ${token}`
         }
 
-        const response = await fetch(saberApiTleUrl, {
+        const response = await fetch(saberApiSatelliteUrl, {
             method: "GET",
             headers: headersList
         })
 
-        const data = await response.text()
+        const data = await response.json()
 
         console.log(`SERVER saber.ts _getTle data: ${data}`)
 
@@ -129,7 +135,10 @@ async function _getTle() {
     } catch (error) {
         console.log(`SERVER saber.ts _getTle error: ${error}`)
 
-        return new Error(`SERVER saber.ts _getTle error: ${error}`)
+        return new TRPCError({
+            code: "BAD_REQUEST",
+            message: `SERVER saber.ts _getTle error: ${error}`,
+        })
     }
 
 }
