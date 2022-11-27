@@ -7,10 +7,9 @@ import { trpc } from "~/utils/trpc"
 
 export default function SaberPage() {
 
-    // const theData = trpc.gruntify.getOneFullRow.useQuery(() => parameterObject)
+    const testObject = trpc.saber.getSatellites.useQuery()
 
-    const testObject = trpc.saber.getTle.useQuery()
-
+    console.log(`saber.tsx SaberPage() testObject: ${JSON.stringify(testObject, null, 4)}`)
 
     return (
         <Layout>
@@ -24,19 +23,27 @@ export default function SaberPage() {
 
             <h2 class="text-center mx-auto ">Global <span class="text-warning" >Space Operations</span> Provider</h2>
 
-            <Switch fallback="sans data">
+            <Switch
+                fallback=
+                {
+                    <div class='text-center mx-auto alert alert-error'>errata unknown: {JSON.stringify(testObject, null, 4)}</div>
+                }
+            >
+                <Match when={testObject.error}>
+                    <div class="alert alert-error">Error: {testObject.error?.data?.httpStatus} | {testObject.error?.data?.code} at <code>{testObject.error?.data?.path}</code></div>
+                </Match>
 
                 <Match when={testObject.isRefetching}>
-                    <div class="text-center mx-auto">Re-fetching...</div>
+                    <div class="alert alert-info">Re-fetching...</div>
                 </Match>
 
                 <Match when={testObject.isFetching}>
-                    <div class="text-center mx-auto">Fetching...</div>
+                    <div class="alert alert-warning">Fetching...</div>
                 </Match>
 
                 <Match when={testObject.data}>
                     <pre>
-                        {typeof(testObject.data) === 'string' ? JSON.stringify(JSON.parse(testObject.data), null, 4) : null}
+                        {JSON.stringify(testObject.data, null, 4)}
                     </pre>
                 </Match>
 
