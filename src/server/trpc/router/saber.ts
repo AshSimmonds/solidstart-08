@@ -19,12 +19,6 @@ let refreshToken = ''
 let currentTokenExpiry = 1690002013000
 
 export default router({
-    // login: procedureRegistered.query(() => {
-    //     const token = _getToken()
-
-    // }),
-
-    // getTle: procedureRegistered.query(() => {
     getSatellites: procedureRegistered.query(() => {
         const satellites = _getTle()
         return satellites
@@ -35,20 +29,9 @@ export default router({
 
 
 
-
-
-// make procedure to get SABER_API_ACCESS_TOKEN and SABER_API_REFRESH_TOKEN using SABER_USERNAME and SABER_PASSWORD
-
-
-
-
 async function _getToken() {
 
-    console.log(`saber.ts _getToken() currentToken: ${currentToken}`)
-
     const rightMeow = Date.now()
-
-    console.log(`saber.ts _getToken() rightMeow: ${rightMeow}`)
 
     if (currentToken) {
         if (rightMeow < currentTokenExpiry) {
@@ -67,7 +50,7 @@ async function _getToken() {
             "Content-Type": "application/x-www-form-urlencoded"
         }
 
-        const bodyContent = `username=${serverEnv.SABER_USERNAME}&password=${serverEnv.SABER_PASSWORD}`
+        const bodyContent = `username=${saberUsername}&password=${saberPassword}`
 
         console.log(`####################################`)
         console.log(`######                    ##########`)
@@ -90,18 +73,15 @@ async function _getToken() {
         const newToken = data.access_token
 
         // TODO: do some JWT verify magicks
-        console.log(`SERVER saber.ts _getToken newToken: ${newToken}`)
 
         currentToken = newToken
         refreshToken = data.refresh_token
         currentTokenExpiry = rightMeow + saberApiAccessTokenExpiryDuration
 
-        console.log(`SERVER saber.ts _getToken currentTokenExpiry: ${currentTokenExpiry}`)
-
         return newToken
 
     } catch (error) {
-        console.log(`SERVER saber.ts _getToken error: ${error}`)
+        console.error(`SERVER saber.ts _getToken error: ${error}`)
 
         return new TRPCError({
             code: "BAD_REQUEST",
@@ -113,11 +93,7 @@ async function _getToken() {
 
 
 async function _refreshToken() {
-
-    // console.log(`SERVER saber.ts _refreshToken() currentToken: ${currentToken}`)
-    // console.log(`SERVER saber.ts _refreshToken() currentTokenExpiry: ${currentTokenExpiry}`)
-    // console.log(`SERVER saber.ts _refreshToken() Date.now(): ${Date.now()}`)
-    // console.log(`SERVER saber.ts _refreshToken() Date.now() < currentTokenExpiry: ${Date.now() < currentTokenExpiry}`)
+    console.log(`SERVER saber.ts _refreshToken REFRESHING`)
 
     try {
 
@@ -125,8 +101,6 @@ async function _refreshToken() {
             "Accept": "*/*",
             "Authorization": `Bearer ${refreshToken}`
         }
-
-        console.log(`SERVER saber.ts _refreshToken REFRESHING`)
 
         const response = await fetch(saberApiRefreshUrl, {
             method: "GET",
@@ -139,9 +113,8 @@ async function _refreshToken() {
 
         const data = await response.json()
 
-        // console.log(`SERVER saber.ts _refreshToken data: ${data}`)
-
         const newToken = data.access_token
+
         // TODO: do some JWT verify magicks
 
         currentToken = newToken
@@ -151,7 +124,7 @@ async function _refreshToken() {
 
 
     } catch (error) {
-        console.log(`SERVER saber.ts _refreshToken error: ${error}`)
+        console.error(`SERVER saber.ts _refreshToken error: ${error}`)
         return new TRPCError({
             code: "BAD_REQUEST",
             message: `SERVER saber.ts _refreshToken error: ${error}`,
@@ -165,16 +138,11 @@ async function _refreshToken() {
 
 
 
-
-
-
 async function _getTle() {
 
     try {
 
         const token = await _getToken()
-
-        // console.log(`SERVER saber.ts _getTle token: ${token}`)
 
         if (!token) {
             throw new Error(`saber.ts _getTle() - token not found`)
@@ -201,7 +169,7 @@ async function _getTle() {
         return data
 
     } catch (error) {
-        console.log(`SERVER saber.ts _getTle() error: ${error}`)
+        console.error(`SERVER saber.ts _getTle() error: ${error}`)
 
         return new TRPCError({
             code: "BAD_REQUEST",
