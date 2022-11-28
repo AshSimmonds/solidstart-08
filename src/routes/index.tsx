@@ -81,6 +81,16 @@ const buttonList = [
         "buttonLink": "/saber",
         "colorClass": "warning"
     },
+    {
+        "buttonText": "XCOM",
+        "buttonLink": "/xcom",
+        "colorClass": "accent"
+    },
+    {
+        "buttonText": "trpc.io",
+        "buttonLink": "/trpc",
+        "colorClass": "info"
+    },
 ]
 
 

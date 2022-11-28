@@ -1,16 +1,23 @@
-import { z } from "zod";
-import { procedurePublic, router, procedureRegistered } from "../utils";
+import { z } from "zod"
+import { procedurePublic, router, procedureRegistered } from "../utils"
 
 export default router({
-    hello: procedurePublic.input(z.object({ name: z.string() })).query(({ input }) => {
-        return `Hello ${input.name}`;
-    }),
+    hello: procedurePublic
+        .input(z.object({ name: z.string() }))
+        .query(({ input }) => {
+            console.log(`SERVER | g'day ${input.name}`)
+            return `Hello ${input.name}`
+        }),
+
     random: procedurePublic
         .input(z.object({ num: z.number() }))
         .mutation(({ input }) => {
-            return Math.floor(Math.random() * 100) / input.num;
+            console.log(`SERVER | random number: ${input.num}`)
+            return Math.floor(Math.random() * 100) / input.num
         }),
+
     secret: procedureRegistered.query(({ ctx }) => {
-        return `This is top secret - ${ctx.user.displayName}`;
+        console.log(`SERVER | secret: ${ctx.user}`)
+        return `This is top secret - @${ctx.user.displayName}`
     }),
-});
+})
