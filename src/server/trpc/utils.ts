@@ -6,13 +6,27 @@ export const t = initTRPC.context<IContext>().create()
 
 
 const isRegistered = t.middleware(async ({ ctx, next }) => {
+
+    console.log("SERVER | trpc/utils.ts | isRegistered | ABOUT TO CHECK")
+
     const user = await authenticator.isAuthenticated(ctx.req)
+
+    console.log("SERVER | trpc/utils.ts | isRegistered | CHECKED ASYNC")
+
+    console.log("SERVER | trpc/utils.ts | isRegistered | user:", user)
+
     if (!user) {
+
+        console.log("SERVER | trpc/utils.ts | isRegistered | NOT REGISTERED")
+
         throw new TRPCError({
             code: "UNAUTHORIZED",
             message: "401 | Yeah nah",
         })
     }
+
+    console.log("SERVER | trpc/utils.ts | isRegistered | REGISTERED")
+    
     return next({ ctx: { ...ctx, user } })
 })
 
