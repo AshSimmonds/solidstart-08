@@ -11,7 +11,7 @@ const saberApiLoginUrl = saberApiUrl + 'login'
 const saberApiRefreshUrl = saberApiUrl + 'refresh'
 const saberApiSatelliteUrl = saberApiUrl + 'tle'
 const saberApiSpaceWeatherUrl = saberApiUrl + 'spwx'
-const saberApiSpaceStomrUrl = saberApiSpaceWeatherUrl + 'status'
+const saberApiSpaceStormUrl = saberApiSpaceWeatherUrl + 'status'
 
 const saberApiAccessTokenExpiryDuration = 840000 // 14 minutes, actually 15 but it is refreshing to be early
 let currentToken = ''
@@ -22,6 +22,11 @@ export default router({
     getSatellites: procedureRegistered.query(() => {
         const satellites = _getTle()
         return satellites
+    }),
+
+    getSpaceWeather: procedureRegistered.query(() => {
+        const spaceWeather = _getSpaceWeather()
+        return spaceWeather
     }),
 
 })
@@ -181,4 +186,50 @@ async function _getTle() {
 }
 
 
+
+
+
+
+
+async function _getSpaceWeather() {
+
+    try {
+
+        const token = await _getToken()
+
+        if (!token) {
+            throw new Error(`saber.ts _getSpaceWeather() - token not found`)
+        }
+
+        const headersList = {
+            "Accept": "*/*",
+            "Authorization": `Bearer ${token}`
+        }
+
+        const response = await fetch(saberApiSpaceWeatherUrl + 'goes_epead', {
+            method: "GET",
+            headers: headersList
+        })
+
+        const data = await response.json()
+
+        if (response.status > 299) {
+            throw new Error(`saber.ts _getSpaceWeather() response status: ${response.status}`)
+        }
+
+        console.log(`SERVER saber.ts _getSpaceWeather() data: ${JSON.stringify(data, null, 4)}`)
+
+        return data
+
+    } catch (error) {
+        console.error(`SERVER saber.ts _getSpaceWeather() error: ${error}`)
+
+        return new TRPCError({
+            code: "BAD_REQUEST",
+            cause: error,
+            message: `SERVER saber.ts _getSpaceWeather() error: ${error}`,
+        })
+    }
+
+}
 
