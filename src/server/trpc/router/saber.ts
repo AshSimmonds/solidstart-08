@@ -13,9 +13,10 @@ const saberApiSatelliteUrl = saberApiUrl + 'tle'
 const saberApiSpaceWeatherUrl = saberApiUrl + 'spwx'
 const saberApiSpaceStomrUrl = saberApiSpaceWeatherUrl + 'status'
 
+const saberApiAccessTokenExpiryDuration = 840000 // 14 minutes, actually 15 but it is refreshing to be early
 let currentToken = ''
-
-
+let refreshToken = ''
+let currentTokenExpiry = 1690002013000
 
 export default router({
     // login: procedureRegistered.query(() => {
@@ -45,8 +46,18 @@ async function _getToken() {
 
     console.log(`saber.ts _getToken() currentToken: ${currentToken}`)
 
+    const rightMeow = Date.now()
+
+    console.log(`saber.ts _getToken() rightMeow: ${rightMeow}`)
+
     if (currentToken) {
-        return currentToken
+        if (rightMeow < currentTokenExpiry) {
+            return currentToken
+        } else {
+            console.log(`saber.ts _getToken() token expired, refreshing...`)
+            const refreshedToken = await _refreshToken()
+            return refreshedToken
+        }
     }
 
     try {
@@ -70,13 +81,11 @@ async function _getToken() {
             headers: headersList
         })
 
-        if (response.status !== 200) {
+        if (response.status > 299) {
             throw new Error(`_getToken response status: ${response.status}`)
         }
 
         const data = await response.json()
-
-        // console.log(`SERVER saber.ts _getToken data: ${data}`)
 
         const newToken = data.access_token
 
@@ -84,6 +93,10 @@ async function _getToken() {
         console.log(`SERVER saber.ts _getToken newToken: ${newToken}`)
 
         currentToken = newToken
+        refreshToken = data.refresh_token
+        currentTokenExpiry = rightMeow + saberApiAccessTokenExpiryDuration
+
+        console.log(`SERVER saber.ts _getToken currentTokenExpiry: ${currentTokenExpiry}`)
 
         return newToken
 
@@ -97,6 +110,57 @@ async function _getToken() {
     }
 
 }
+
+
+async function _refreshToken() {
+
+    // console.log(`SERVER saber.ts _refreshToken() currentToken: ${currentToken}`)
+    // console.log(`SERVER saber.ts _refreshToken() currentTokenExpiry: ${currentTokenExpiry}`)
+    // console.log(`SERVER saber.ts _refreshToken() Date.now(): ${Date.now()}`)
+    // console.log(`SERVER saber.ts _refreshToken() Date.now() < currentTokenExpiry: ${Date.now() < currentTokenExpiry}`)
+
+    try {
+
+        const headersList = {
+            "Accept": "*/*",
+            "Authorization": `Bearer ${refreshToken}`
+        }
+
+        console.log(`SERVER saber.ts _refreshToken REFRESHING`)
+
+        const response = await fetch(saberApiRefreshUrl, {
+            method: "GET",
+            headers: headersList
+        })
+
+        if (response.status > 299) {
+            throw new Error(`SERVER saber.ts _refreshToken response status: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        // console.log(`SERVER saber.ts _refreshToken data: ${data}`)
+
+        const newToken = data.access_token
+        // TODO: do some JWT verify magicks
+
+        currentToken = newToken
+        currentTokenExpiry = Date.now() + saberApiAccessTokenExpiryDuration
+
+        return newToken
+
+
+    } catch (error) {
+        console.log(`SERVER saber.ts _refreshToken error: ${error}`)
+        return new TRPCError({
+            code: "BAD_REQUEST",
+            message: `SERVER saber.ts _refreshToken error: ${error}`,
+        })
+    }
+
+}
+
+
 
 
 
@@ -113,7 +177,7 @@ async function _getTle() {
         // console.log(`SERVER saber.ts _getTle token: ${token}`)
 
         if (!token) {
-            throw new Error(`saber.ts _getTle() token not found`)
+            throw new Error(`saber.ts _getTle() - token not found`)
         }
 
         const headersList = {
@@ -128,7 +192,7 @@ async function _getTle() {
 
         const data = await response.json()
 
-        if (response.status !== 200) {
+        if (response.status > 299) {
             throw new Error(`saber.ts _getTle() response status: ${response.status}`)
         }
 
@@ -141,6 +205,7 @@ async function _getTle() {
 
         return new TRPCError({
             code: "BAD_REQUEST",
+            cause: error,
             message: `SERVER saber.ts _getTle() error: ${error}`,
         })
     }
