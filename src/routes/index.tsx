@@ -91,6 +91,16 @@ const buttonList = [
         "buttonLink": "/trpc",
         "colorClass": "info"
     },
+    {
+        "buttonText": "XState",
+        "buttonLink": "/xstate",
+        "colorClass": "primary"
+    },
+    {
+        "buttonText": "Zag",
+        "buttonLink": "/zag",
+        "colorClass": "warning"
+    },
 ]
 
 
