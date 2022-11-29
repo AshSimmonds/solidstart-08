@@ -1,7 +1,7 @@
 import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
 
-export default function BlankPage() {
+export default function ZagPage() {
     return (
         <Layout>
             <PageTitle>zag</PageTitle>
