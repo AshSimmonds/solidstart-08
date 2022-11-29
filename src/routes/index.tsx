@@ -101,6 +101,11 @@ const buttonList = [
         "buttonLink": "/zag",
         "colorClass": "warning"
     },
+    {
+        "buttonText": "F of XState",
+        "buttonLink": "/f-of-xstate",
+        "colorClass": "error"
+    },
 ]
 
 
