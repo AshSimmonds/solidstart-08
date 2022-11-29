@@ -43,6 +43,7 @@
     "solidjs-auth": "^0.0.8",
     "solidstart-08": "file:",
     "undici": "5.11.0",
+    "xstate": "^4.34.0",
     "zod": "^3.19.1"
   },
   "engines": {
