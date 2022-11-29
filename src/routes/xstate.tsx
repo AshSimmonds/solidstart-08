@@ -1,10 +1,9 @@
 import { createEffect, createSignal } from "solid-js"
-import { State, AnyEventObject, ResolveTypegenMeta, BaseActionObject, ServiceMap } from "xstate"
+// import { State, AnyEventObject, ResolveTypegenMeta, BaseActionObject, ServiceMap } from "xstate"
 import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
-import { counterMachine } from "~/deusex/counter"
-import { counterMachineService } from "~/deusex/counter"
-import { Typegen0 } from "~/deusex/counter.typegen"
+// import { counterMachine } from "~/deusex/counterMachine"
+import { counterMachineService } from "~/deusex/counterMachine"
 
 export default function XStatePage() {
 
@@ -41,7 +40,7 @@ export default function XStatePage() {
                     <button onclick={() => counterMachineService.send("increment")} class="btn btn-circle text-xl">+</button>
 
                     <p>
-                        State.value: <span class="badge text-xl ">{counterState().context.count}</span>
+                        State.value: <span class="badge text-xl ">{counterState().value.toString()}</span>
                     </p>
 
                     <button onclick={() => counterMachineService.send("disable")} class="btn btn-warning" >Disable</button>
@@ -52,9 +51,13 @@ export default function XStatePage() {
             </div>
 
             <div class="">
-                <pre>{JSON.stringify(counterState, null, 4)}</pre>
+                <pre>{JSON.stringify(counterState(), null, 4)}</pre>
             </div>
 
         </Layout>
     )
 }
+
+
+
+

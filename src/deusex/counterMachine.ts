@@ -2,7 +2,7 @@ import { assign, createMachine, interpret } from 'xstate';
 
 
 export const counterMachine =
-    /** @xstate-layout N4IgpgJg5mDOIC5QGMD2BXAdgFzAJwDoxMBDAIwBtIBiAS02TzAFtjsBtABgF1FQAHVLFrZaqTHxAAPRAFoAjJwBMBAOzyAzPIAc2+eo3aAbKqUAaEAE85qzgQCcnR7s0AWVUYCsRpQF9fFmhYuITE5FQQ1BBgjCxsXLxIIILCouKSMgiyrhr2BEqOnJyenvKeSvKOrhbWWbYOTpwuGu5ePv6BGDj4RKSUNBC0sOFgCZIpImISSZmypgTarnoaRo46Je41chXaBF72ZYqqpraeHSBB3YSDw-2RYf1jSRNp06Czrk17qvYV8q7ubQrcxWbY6PaeA6lTjHJSnfwBECYVDReBJS4hcZCSbpGZyJaqfKFYqlcqVTjVUFZT6uPb2VSlbRwpSueyueRGc4YnoPCJY1JTDLbdT5CrqJYUjz2bRbLI6FQcjz6H6qbSkzmI7nXIYjCD8nFvaTCjQEf5GVxw+y5TwaTwA2WyLSeNT6GlKbRW3LaVQI3xAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QGMD2BXAdgFzAJwDoxMBDAIwBtIBiAS02TzAFtjsBtABgF1FQAHVLFrZaqTHxAAPRAFoAjABYCAdkWKArADYVADhXzOATgDMKjQBoQATzmH5BXfKcqtAJi1GNJ+W40Bffys0LFxCYnIqCGoIMEYWNi5eJBBBYVFxSRkEWQ0VEwItLQ1OTg0NeQ03eSMrWxz7R2d5Vw8vHz9A4IwcfCJSShoIWlhIsCTJNJExCRTst04CTi0TIpU3I3yVt106uR2tR0VjI1Kiqt0TLpAQ3sJh0cHoiMGJlKmM2dBs3MUCssU1SUij0qzcexyByOJzOxR2V2umFQsXgKVuYUmQmmmTmcncDnOpXKlWqtRschKDk2nD8Jl0WicmwR3VCfReUUx6RmWTkdIKul0JXUAp2RkUu3JkOKBG0fnKPh8hhMASCNx6YQIDzGEE52K+0l5l0cgs4wt0ovFENkil8BCMp3kJiMAqFCMCQA */
     createMachine({
         context: {
             count: 0,
@@ -11,13 +11,17 @@ export const counterMachine =
             disabledCount: 0,
             enabledCount: 0,
         },
-        tsTypes: {} as import("./counter.typegen").Typegen0,
+        tsTypes: {} as import("./counterMachine.typegen").Typegen0,
         predictableActionArguments: true,
         id: "counter",
         initial: "disabled",
         states: {
             enabled: {
                 entry: "setEnabled",
+                invoke: {
+                    src: "toggleEnabledDisabledFunction",
+                    id: "toggleEnabledDisabled",
+                },
                 on: {
                     increment: {
                         actions: "incrementCounter",
@@ -32,6 +36,10 @@ export const counterMachine =
             },
             disabled: {
                 entry: "setDisabled",
+                invoke: {
+                    src: "toggleEnabledDisabledFunction",
+                    id: "toggleEnabledDisabled",
+                },
                 on: {
                     enable: {
                         target: "enabled",
@@ -59,7 +67,13 @@ export const counterMachine =
                 context.enabledCount++;
                 console.log(`event: ${JSON.stringify(event)} context: ${JSON.stringify(context)}`);
             },
-        }
+        },
+        services: {
+            toggleEnabledDisabledFunction: (context, event) => (sendBack) => {
+                console.log(`event: ${JSON.stringify(event)} context: ${JSON.stringify(context)}`);
+
+            },
+        },
     })
 
 

@@ -3,9 +3,20 @@
 export interface Typegen0 {
   "@@xstate/typegen": true;
   internalEvents: {
+    "done.invoke.toggleEnabledDisabled": {
+      type: "done.invoke.toggleEnabledDisabled";
+      data: unknown;
+      __tip: "See the XState TS docs to learn how to strongly type this.";
+    };
+    "error.platform.toggleEnabledDisabled": {
+      type: "error.platform.toggleEnabledDisabled";
+      data: unknown;
+    };
     "xstate.init": { type: "xstate.init" };
   };
-  invokeSrcNameMap: {};
+  invokeSrcNameMap: {
+    toggleEnabledDisabledFunction: "done.invoke.toggleEnabledDisabled";
+  };
   missingImplementations: {
     actions: never;
     services: never;
@@ -18,7 +29,9 @@ export interface Typegen0 {
     setDisabled: "disable" | "xstate.init";
     setEnabled: "enable";
   };
-  eventsCausingServices: {};
+  eventsCausingServices: {
+    toggleEnabledDisabledFunction: "disable" | "enable" | "xstate.init";
+  };
   eventsCausingGuards: {};
   eventsCausingDelays: {};
   matchesStates: "disabled" | "enabled";
