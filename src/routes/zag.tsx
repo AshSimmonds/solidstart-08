@@ -4,22 +4,21 @@ import * as toggle from "@zag-js/toggle"
 import { useMachine, normalizeProps } from "@zag-js/solid"
 import * as tabs from "@zag-js/tabs"
 import { createMemo, createUniqueId, For } from "solid-js"
+import "../styles/Zag.module.css"
 
 const tabsData = [
-    { value: "item-1", label: "Item one", content: "Item one content" },
+    { value: "item-1", label: "Item one", content: `Item one ${<span>asdf</span>} content` },
     { value: "item-2", label: "Item two", content: "Item two content" },
-    { value: "item-3", label: "Item three", content: "Item three content" },
+    { value: "item-3", label: "Item three", content: `Item three  content` },
 ]
 
 export default function ZagPage() {
     const [toggleState, toggleSend] = useMachine(toggle.machine({
         id: createUniqueId()
     }))
-
     const toggleApi = createMemo(() => toggle.connect(toggleState, toggleSend, normalizeProps))
 
     const [tabsState, tabsSend] = useMachine(tabs.machine({ id: createUniqueId(), value: "item-1" }))
-
     const tabsApi = createMemo(() => tabs.connect(tabsState, tabsSend, normalizeProps))
 
     return (
@@ -31,17 +30,20 @@ export default function ZagPage() {
 
 
                 <h3>toggle</h3>
-                <button {...toggleApi().buttonProps}>
-                    {toggleApi().isPressed ? "On" : "Off"}
+                <button {...toggleApi().buttonProps} class={`btn btn-outline btn-${toggleApi().isPressed ? "success" : "error"} `}>
+                    {toggleApi().isPressed ? "ON" : "OFF"}
                 </button>
 
 
                 <h3>tabs</h3>
-                <div {...tabsApi().rootProps}>
-                    <div {...tabsApi().triggerGroupProps}>
+                <div {...tabsApi().rootProps} class="grid ">
+
+                    <div {...tabsApi().indicatorProps} class="tab tab-lifted tab-active" />
+
+                    <div {...tabsApi().triggerGroupProps} class="tabs">
                         <For each={tabsData}>
                             {(item) => (
-                                <button {...tabsApi().getTriggerProps({ value: item.value })}>
+                                <button {...tabsApi().getTriggerProps({ value: item.value })} class="tab tab-lifted">
                                     {item.label}
                                 </button>
                             )}
@@ -49,13 +51,12 @@ export default function ZagPage() {
                     </div>
                     <For each={tabsData}>
                         {(item) => (
-                            <div {...tabsApi().getContentProps({ value: item.value })}>
+                            <div {...tabsApi().getContentProps({ value: item.value })} class="border-2 border-primary border-opacity-20">
                                 <p>{item.content}</p>
                             </div>
                         )}
                     </For>
                 </div>
-
 
 
             </div>
