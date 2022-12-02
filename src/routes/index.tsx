@@ -140,8 +140,6 @@ const Home: ParentComponent = () => {
 
     const theTestServerData = useRouteData<typeof routeData>()
 
-    console.log(`theTestServerData`, theTestServerData())
-
     return (
         // <Layout>
         <div class="flex flex-col items-center justify-center mx-auto p-4">
