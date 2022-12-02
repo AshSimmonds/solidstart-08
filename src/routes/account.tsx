@@ -4,6 +4,7 @@ import Layout from "~/components/Layout"
 import { userObjectPromise } from "~/components/Avatar"
 import { authClient } from "~/utils/auth"
 import "../styles/Cyberpunk.module.css"
+import { Form } from "solid-start/data/Form"
 
 export default function AccountPage() {
     const user = userObjectPromise()
@@ -28,6 +29,11 @@ export default function AccountPage() {
                         >
                             Discord
                         </button>
+
+                        <Form action="/auth/auth0" method="post">
+                            <button>Auth0 DOES NOT WORK YET (2022-12-03)</button>
+                        </Form>
+
                     </>
                 }
             >
