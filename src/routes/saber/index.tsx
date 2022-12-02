@@ -38,7 +38,7 @@ export default function SaberPage() {
                 <Match when={satellites.error}>
                     <div class="alert alert-error">Error: {satellites.error?.data?.httpStatus} | {satellites.error?.data?.code} at <code>{satellites.error?.data?.path}</code>
                         <Show when={satellites.error?.data?.httpStatus === 401}>
-                            <A href="/profile" class="btn btn-secondary">Authenticate</A>
+                            <A href="/account" class="btn btn-secondary">Authenticate</A>
                         </Show>
 
                     </div>
@@ -75,7 +75,7 @@ export default function SaberPage() {
                 <Match when={weather.error}>
                     <div class="alert alert-error">Error: {weather.error?.data?.httpStatus} | {weather.error?.data?.code} at <code>{weather.error?.data?.path}</code>
                         <Show when={weather.error?.data?.httpStatus === 401}>
-                            <A href="/profile" class="btn btn-secondary">Authenticate</A>
+                            <A href="/account" class="btn btn-secondary">Authenticate</A>
                         </Show>
 
                     </div>

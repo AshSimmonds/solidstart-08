@@ -67,7 +67,7 @@ function NavbarMiddle() {
 function NavbarEnd() {
     return (
         <div class="navbar-end">
-            <A href="/profile" class="btn btn-circle btn-accent">
+            <A href="/account" class="btn btn-circle btn-accent">
                 <Avatar />
             </A>
         </div>

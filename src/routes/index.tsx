@@ -32,8 +32,8 @@ const buttonList = [
         "colorClass": "neutral"
     },
     {
-        "buttonText": "Profile",
-        "buttonLink": "/profile",
+        "buttonText": "Account",
+        "buttonLink": "/account",
         "colorClass": "primary"
     },
     {

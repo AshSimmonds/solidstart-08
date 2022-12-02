@@ -5,13 +5,13 @@ import { userObjectPromise } from "~/components/Avatar"
 import { authClient } from "~/utils/auth"
 import "../styles/Cyberpunk.module.css"
 
-export default function ProfilePage() {
+export default function AccountPage() {
     const user = userObjectPromise()
 
     return (
         <Layout>
-            <PageTitle>Profile</PageTitle>
-            <h1>Profile</h1>
+            <PageTitle>Account</PageTitle>
+            <h1>Account</h1>
 
             <Switch
                 fallback={
@@ -21,7 +21,7 @@ export default function ProfilePage() {
                             onClick={() =>
                                 authClient.login("discord", {
                                     successRedirect: "/",
-                                    failureRedirect: "/",
+                                    failureRedirect: "/account",
                                 })
                             }
                             class=""
