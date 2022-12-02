@@ -1,9 +1,32 @@
 import { type ParentComponent, Switch, Match, For } from "solid-js"
-import { A, Title } from "solid-start"
+import { A, Title, useRouteData } from "solid-start"
 
 
-import server$ from "solid-start/server"
+import server$, { createServerData$ } from "solid-start/server"
 import Layout from "~/components/Layout"
+
+
+export const routeData = () => {
+    return createServerData$(async () => {
+
+        try {
+            const resServer = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+
+            const dataServer = await resServer.json()
+
+            const theCoolData = dataServer.abilities[0]
+
+            console.log(`theCoolData: ${JSON.stringify(theCoolData, null, 4)}`)
+
+            return theCoolData
+
+        } catch (error) {
+            console.error(`qwer: ${error}`)
+        }
+    })
+}
+
+
 
 const serverGday = server$(async (message: string) => {
     const theMediumIsNotTheMessage = `G'day from SERVER, ${message}`
@@ -115,25 +138,33 @@ const Home: ParentComponent = () => {
     const clientMessage = clientGday('dude')
     const serverMessage = serverGday('sweet')
 
+    const theTestServerData = useRouteData<typeof routeData>()
+
+    console.log(`theTestServerData`, theTestServerData())
+
     return (
         // <Layout>
-            <div class="flex flex-col items-center justify-center mx-auto p-4">
+        <div class="flex flex-col items-center justify-center mx-auto p-4">
 
-                <Title>Blue Dwarf dot Space | SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</Title>
-                {/* <h1>SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</h1> */}
+            <Title>Blue Dwarf dot Space | SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</Title>
+            {/* <h1>SolidStart beta | SolidJS with tRPC Zod Prisma Tailwind</h1> */}
 
-                <div class="bg-base-100 p-12">
-                    <img src={`/moonlogo_small.png`} alt="Blue Dwarf Space logo" class="mx-auto w-full sm:w-1/3 md:w-2/3" />
-                </div>
-
-                <div class="w-full grid gap-8 grid-cols-2 mt-12 mb-8">
-                    <For each={buttonList}>
-                        {(button) => (
-                            <A href={button.buttonLink} class={`translucent btn btn-${button.colorClass} bg-opacity-20 text-2xl leading-5`}>{button.buttonText}</A>
-                        )}
-                    </For>
-                </div>
+            <div class="bg-base-100 p-12">
+                <img src={`/moonlogo_small.png`} alt="Blue Dwarf Space logo" class="mx-auto w-full sm:w-1/3 md:w-2/3" />
             </div>
+
+            <pre>
+                {JSON.stringify(theTestServerData(), null, 4)}
+            </pre>
+
+            <div class="w-full grid gap-8 grid-cols-2 mt-12 mb-8">
+                <For each={buttonList}>
+                    {(button) => (
+                        <A href={button.buttonLink} class={`translucent btn btn-${button.colorClass} bg-opacity-20 text-2xl leading-5`}>{button.buttonText}</A>
+                    )}
+                </For>
+            </div>
+        </div>
         // </Layout>
     )
 }
