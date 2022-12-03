@@ -56,6 +56,7 @@ export default function Root() {
                 <link rel="preconnect" href="https://api.fonts.coollabs.io" />
                 <link href="https://api.fonts.coollabs.io/css2?family=Montserrat&family=Rajdhani:wght@600&family=Orbitron:wght@600&family=VT323&display=swap" rel="stylesheet"></link>
 
+                <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui@2/augmented-ui.min.css" />
 
             </Head>
             <Body>

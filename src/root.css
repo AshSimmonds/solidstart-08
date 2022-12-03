@@ -274,3 +274,80 @@ code {
     max-width: 80%;
 }
 
+
+/* <div id="announc3ment" data-augmented-ui="" class=""> */
+#xcomgreenright {
+    --aug-clip-tl1: initial;
+    --aug-round-tr1: initial;
+    --aug-clip-br1: initial;
+    --aug-round-bl1: initial;
+    --aug-border: initial;
+    --aug-inlay: initial;
+    --aug-border-all: 1px;
+    --aug-inlay-all: 2px;
+    --aug-border-bg: lime;
+    --aug-inlay-bg: lime;
+    --aug-inlay-opacity: 0.06;
+    --aug-tl1: 40px;
+    --aug-br1: 40px;
+    --aug-tr1: 10px;
+    --aug-bl1: 10px;
+    /* color: #cccccc;
+    text-align: center; */
+    /* padding-left: 30px;
+    padding-right: 30px; */
+    /* padding-top: 20px; */
+    /* padding-bottom: 20px;
+    max-width: 66%; */
+    /* margin: 0.25rem auto; */
+    /* font-size: 0.9rem; */
+    /*background: url("/img/chubie.png") right 30px bottom 10px / auto 75% no-repeat;*/
+}
+
+#xcomgreenright:hover {
+    --aug-inlay-opacity: 0.1;
+}
+
+#xcomgreenright::before {
+    transition: opacity 1s ease-in;
+}
+
+#xcomgreenright:hover::before {
+    transition: opacity 1s ease-in 3s;
+}
+
+#xcomgreenright b {
+    color: white;
+    font-size: 1rem;
+}
+
+#xcomblueleft {
+    /* --aug-clip-tl1: initial; */
+    /* --aug-round-tr1: initial; */
+    --aug-clip-br1: initial;
+    /* --aug-round-bl1: initial; */
+    --aug-border: initial;
+    --aug-inlay: initial;
+    --aug-border-all: 1px;
+    --aug-inlay-all: 2px;
+    --aug-border-bg: #026087;
+    --aug-inlay-bg: #026087;
+    --aug-inlay-opacity: 0.06;
+    /* --aug-tl1: 40px; */
+    /* --aug-br1: 40px; */
+    /* --aug-tr1: 10px; */
+    --aug-bl1: 30px;
+    --aug-b1: 20px;
+    /* color: #cccccc;
+    text-align: center; */
+    /* padding-left: 30px;
+    padding-right: 30px; */
+    /* padding-top: 20px; */
+    /* padding-bottom: 20px;
+    max-width: 66%; */
+    /* margin: 0.25rem auto; */
+    /* font-size: 0.9rem; */
+    /*background: url("/img/chubie.png") right 30px bottom 10px / auto 75% no-repeat;*/
+}
+
+
