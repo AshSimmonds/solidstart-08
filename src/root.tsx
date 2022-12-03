@@ -60,13 +60,13 @@ export default function Root() {
 
             </Head>
             <Body>
-                <Suspense>
+                {/* <Suspense> */}
                     <ErrorBoundary>
                         <Routes>
                             <FileRoutes />
                         </Routes>
                     </ErrorBoundary>
-                </Suspense>
+                {/* </Suspense> */}
                 <Scripts />
             </Body>
         </Html>
