@@ -144,6 +144,11 @@ const buttonList = [
         "buttonLink": "/modular-forms",
         "colorClass": "primary"
     },
+    {
+        "buttonText": "Motion Animations",
+        "buttonLink": "/motion",
+        "colorClass": "warning"
+    },
 ]
 
 
