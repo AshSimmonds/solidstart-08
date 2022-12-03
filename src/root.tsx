@@ -14,6 +14,11 @@ import {
     Title,
 } from "solid-start"
 
+// import * as _houdiniHud from 'algosdk/dist/browser/algosdk.min.js';
+// const algosdk: typeof import('algosdk') = _algosdk;
+
+// @ts-ignore
+
 export default function Root() {
     return (
         <Html lang="en">
@@ -51,7 +56,6 @@ export default function Root() {
                 <link rel="preconnect" href="https://api.fonts.coollabs.io" />
                 <link href="https://api.fonts.coollabs.io/css2?family=Montserrat&family=Rajdhani:wght@600&family=Orbitron:wght@600&family=VT323&display=swap" rel="stylesheet"></link>
 
-                <script src="https://unpkg.com/houdini-hud@0.0.1/index.js"></script>
 
             </Head>
             <Body>
