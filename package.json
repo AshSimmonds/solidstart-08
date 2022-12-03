@@ -26,6 +26,7 @@
     "vite": "^3.1.0"
   },
   "dependencies": {
+    "@modular-forms/solid": "^0.8.4",
     "@prisma/client": "^4.6.1",
     "@simplystated/f-of-xstate": "^0.4.0",
     "@solid-auth/auth0": "^0.0.2",

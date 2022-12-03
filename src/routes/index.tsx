@@ -139,6 +139,11 @@ const buttonList = [
         "buttonLink": "/suspense",
         "colorClass": "secondary"
     },
+    {
+        "buttonText": "Modular Forms",
+        "buttonLink": "/modular-forms",
+        "colorClass": "primary"
+    },
 ]
 
 
