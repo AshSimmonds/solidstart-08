@@ -129,6 +129,11 @@ const buttonList = [
         "buttonLink": "/f-of-xstate",
         "colorClass": "error"
     },
+    {
+        "buttonText": "Advent of Code 2022 | Day 3",
+        "buttonLink": "/aoc2203",
+        "colorClass": "accent"
+    },
 ]
 
 

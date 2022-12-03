@@ -221,3 +221,56 @@ code {
 .translucent {
     color: #73e5ff;
 }
+
+
+
+
+.hh01 {
+    --hud-tl1: clip;
+    --hud-tl1-size: 2.5rem;
+
+    --hud-br1: clip;
+    --hud-br1-size: 2.5rem;
+
+    --hud-inlay-bg: #b2a5fd;
+    /* --hud-inlay-opacity: 0.33; */
+
+    padding: 1.5rem;
+    margin: auto;
+    max-width: 66%;
+}
+
+.hexed {
+    --hud-inlay-bg: #0bb2b0;
+    --hud-inlay-opacity: 0.1;
+    --hud-bl-inset: 0.75rem;
+    --hud-tr1: clip;
+    --hud-tr1-size: 3rem;
+    --hud-l2: clip;
+    --hud-l1: clip;
+    --hud-bl2: round;
+    --hud-bl1: clip;
+    --hud-l2-size: 1rem;
+    --hud-l2-inset-y: 25%;
+    --hud-l1-size: 0.25rem;
+    --hud-bl2-size: 1rem;
+    --hud-bl1-size: 0.5rem;
+    --hud-b1: clip;
+    --hud-b1-size: 1rem;
+    --hud-b1-inset-x: 33%;
+    --hud-b2: clip;
+    --hud-b2-size: 0.25rem;
+    --hud-br1: round;
+    --hud-br1-size: 1rem;
+    width: 100%;
+    height: max(50%, 150px);
+    --hud-inlay-all: 7px;
+    --hud-border-all: 2px;
+    --hud-border-opacity: 0.75;
+    --hud-border-bg: #0bb2b0;
+
+    padding: 3rem;
+    margin: auto;
+    max-width: 80%;
+}
+
