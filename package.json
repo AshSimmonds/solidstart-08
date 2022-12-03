@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
+    "@simplystated/f-of-xstate": "^0.4.0",
     "@solid-auth/auth0": "^0.0.2",
     "@solid-auth/core": "^0.0.3",
     "@solid-auth/socials": "^0.0.4",
