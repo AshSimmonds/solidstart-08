@@ -134,6 +134,11 @@ const buttonList = [
         "buttonLink": "/aoc2203",
         "colorClass": "accent"
     },
+    {
+        "buttonText": "SolidJS Suspense",
+        "buttonLink": "/suspense",
+        "colorClass": "secondary"
+    },
 ]
 
 
