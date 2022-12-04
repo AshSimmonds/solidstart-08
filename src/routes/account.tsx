@@ -30,9 +30,32 @@ export default function AccountPage() {
                             Discord
                         </button>
 
-                        <Form action="/auth/auth0" method="post">
-                            <button>Auth0 DOES NOT WORK YET (2022-12-03)</button>
-                        </Form>
+
+                        <button
+                            onClick={() =>
+                                authClient.login("auth0", {
+                                    successRedirect: "/",
+                                    failureRedirect: "/account",
+                                })
+                            }
+                            class=""
+                        >
+                            Auth0
+                        </button>
+
+
+                        <button
+                            onClick={() =>
+                                authClient.logout({
+                                    redirectTo: "/",
+                                })
+                            }
+                            class=""
+                        >
+                            EMERGENCY EJECT
+                        </button>
+
+                        <pre>{JSON.stringify(user(), null, 4)}</pre>
 
                     </>
                 }
