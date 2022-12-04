@@ -105,6 +105,11 @@ const buttonList = [
         "colorClass": "warning"
     },
     {
+        "buttonText": "Space Cock",
+        "buttonLink": "/saber/spacecock",
+        "colorClass": "warning"
+    },
+    {
         "buttonText": "XCOM",
         "buttonLink": "/xcom",
         "colorClass": "accent"
