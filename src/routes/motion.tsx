@@ -48,7 +48,7 @@ export default function MotionPage() {
             <h2>Transition</h2>
             <MotionTransition />
 
-            <h2>Events</h2>
+            <h2>Events (check dev console log)</h2>
             <MotionEvents />
         </Layout>
     )
@@ -140,7 +140,10 @@ const MotionExit: Component = () => {
     const [toggle, setToggle] = createSignal(true)
 
     return (
-        <div class="container mt-8">
+        <div class="container">
+            <button onClick={() => setToggle(!toggle())}>
+                Show / Hide
+            </button>
             <Presence exitBeforeEnter>
                 <Show when={toggle()}>
                     <Motion.div
@@ -157,9 +160,6 @@ const MotionExit: Component = () => {
                     </Motion.div>
                 </Show>
             </Presence>
-            <button onClick={() => setToggle(!toggle())}>
-                Toggle
-            </button>
         </div>
     )
 }
@@ -173,6 +173,7 @@ const MotionAnimateBetween: Component = () => {
 
     return (
         <>
+            <button onClick={increment}>Next</button>
             <Presence exitBeforeEnter>
                 <Rerun on={count()}>
                     <Motion
@@ -186,7 +187,6 @@ const MotionAnimateBetween: Component = () => {
                     </Motion>
                 </Rerun>
             </Presence>
-            <button onClick={increment}>Next</button>
         </>
     )
 }
@@ -287,6 +287,9 @@ const MotionTransition: Component = () => {
 
     return (
         <>
+            <button onClick={() => setToggle(!toggle())}>
+                Show / Hide
+            </button>
             <Presence exitBeforeEnter>
                 <Show when={toggle()}>
 
@@ -302,30 +305,46 @@ const MotionTransition: Component = () => {
                     </Motion.div>
                 </Show>
             </Presence>
-            <button onClick={() => setToggle(!toggle())}>
-                Toggle
-            </button>
         </>
     )
 }
 
 
 const MotionEvents: Component = () => {
+    const [toggle, setToggle] = createSignal(true)
+
     return (
-        <Motion.div
-            class="bg-secondary p-4"
-            animate={{ opacity: [0, 1] }}
-            onMotionStart={({ detail }) => console.log("onMotionStart: ", detail)}
-            onMotionComplete={({ detail }) => console.log("onMotionComplete: ", detail)}
-            onHoverStart={({ detail }) => console.log("onHoverStart: ", detail)}
-            onHoverEnd={({ detail }) => console.log("onHoverEnd: ", detail)}
-            onPressStart={({ detail }) => console.log("onPressStart: ", detail)}
-            onPressEnd={({ detail }) => console.log("onPressEnd: ", detail)}
-            onViewEnter={({ detail }) => console.log("onViewEnter: ", detail)}
-            onViewLeave={({ detail }) => console.log("onViewLeave: ", detail)}
-        >
-            onMotionStart onMotionComplete onHoverStart onHoverEnd onPressStart onPressEnd onViewEnter onViewLeave
-        </Motion.div>
+        <>
+            <button onClick={() => setToggle(!toggle())}>
+                Show / Hide
+            </button>
+
+            <Presence exitBeforeEnter>
+                <Show when={toggle()}>
+                    <Motion.div
+                        class="bg-secondary p-4"
+                        animate={{ opacity: [0, 1] }}
+                        exit={{ x: 0, opacity: 0, scale: 0.6 }}
+                        transition={{ duration: 0.5 }}
+                        hover={{ scale: 1.2 }}
+                        press={{ scale: 0.9 }}
+                        inView={{ scale: 1.1, background: 'blue', transition: { duration: 3.5 } }}
+                        inViewOptions={{ amount: 0.5 }}
+                    
+                        onMotionStart={({ detail }) => console.log("onMotionStart: ", detail)}
+                        onMotionComplete={({ detail }) => console.log("onMotionComplete: ", detail)}
+                        onHoverStart={({ detail }) => console.log("onHoverStart: ", detail)}
+                        onHoverEnd={({ detail }) => console.log("onHoverEnd: ", detail)}
+                        onPressStart={({ detail }) => console.log("onPressStart: ", detail)}
+                        onPressEnd={({ detail }) => console.log("onPressEnd: ", detail)}
+                        onViewEnter={({ detail }) => console.log("onViewEnter: ", detail)}
+                        onViewLeave={({ detail }) => console.log("onViewLeave: ", detail)}
+                    >
+                        onMotionStart onMotionComplete onHoverStart onHoverEnd onPressStart onPressEnd onViewEnter onViewLeave
+                    </Motion.div>
+                </Show>
+            </Presence>
+        </>
     )
 }
 
