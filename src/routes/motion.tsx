@@ -44,6 +44,9 @@ export default function MotionPage() {
 
             <h2>Press</h2>
             <MotionPress />
+
+            <h2>Transition</h2>
+            <MotionTransition />
         </Layout>
     )
 }
@@ -244,6 +247,7 @@ const MotionSVGPathDrawing: Component = (props) => {
                 pathLength="1"
                 animate={draw(1)}
                 transition={{ duration: 0.6, delay: 2.4 }}
+                class="bg-secondary p-4"
             />
         </svg>
     )
@@ -273,3 +277,31 @@ const MotionPress: Component = () => {
     )
 }
 
+
+
+const MotionTransition: Component = () => {
+    const [toggle, setToggle] = createSignal(true)
+
+    return (
+        <>
+            <Presence exitBeforeEnter>
+                <Show when={toggle()}>
+
+                    <Motion.div
+                        animate={{ x: 100, transition: { duration: 0.2 } }}
+                        exit={{ x: 0, transition: { duration: 1 } }}
+                        transition={{ duration: 0.5 }}
+                        class="bg-secondary p-4"
+                    >
+                        animate=x: 100, transition:duration: 0.2
+                        exit=x: 0, transition:duration: 1
+                        transition=duration: 0.5
+                    </Motion.div>
+                </Show>
+            </Presence>
+            <button onClick={() => setToggle(!toggle())}>
+                Toggle
+            </button>
+        </>
+    )
+}
