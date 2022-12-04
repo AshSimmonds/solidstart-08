@@ -34,6 +34,7 @@
     "@solid-auth/core": "^0.0.3",
     "@solid-auth/socials": "^0.0.4",
     "@solid-primitives/keyed": "^1.1.4",
+    "@solid-primitives/range": "^0.1.4",
     "@solid-primitives/script-loader": "^1.1.2",
     "@solidjs/meta": "^0.28.0",
     "@solidjs/router": "^0.5.0",

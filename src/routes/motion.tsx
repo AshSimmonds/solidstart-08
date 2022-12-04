@@ -1,8 +1,9 @@
 import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
-import { Component, createSignal, Show } from "solid-js";
+import { Component, createSignal, mergeProps, Show } from "solid-js";
 import { Motion, Presence } from "@motionone/solid";
-import { Rerun } from "@solid-primitives/keyed";
+import { Rerun } from "@solid-primitives/keyed"
+import { Repeat } from "@solid-primitives/range"
 
 export default function MotionPage() {
 
@@ -11,19 +12,29 @@ export default function MotionPage() {
             <PageTitle>Motion One / Dev</PageTitle>
             <h1>Motion One / Dev</h1>
 
+            <h2>Default / basic</h2>
             <MotionDefault />
 
+            <h2>Rotate 90, change yellow</h2>
             <MotionRotate90 />
 
+            <h2>Rotate 90, change yellow, slowly</h2>
             <MotionRotate90Slow />
 
+            <h2>Click to change background colour</h2>
             <MotionClickToChangeBackground />
 
+            <h2>Keyframes something</h2>
             <MotionKeyframes />
 
+            <h2>Exit animation</h2>
             <MotionExit />
 
+            <h2>Animate between components</h2>
             <MotionAnimateBetween />
+
+            <h2>SVG loading spinner - <code>OFFSET</code> unknown</h2>
+            <MotionSVGLoadingSpinner offset={0} segments={8} />
         </Layout>
     )
 }
@@ -162,5 +173,35 @@ const MotionAnimateBetween: Component = () => {
             </Presence>
             <button onClick={increment}>Next</button>
         </>
+    )
+}
+
+
+const MotionSVGLoadingSpinner: Component<{ offset: number, segments: number }> = (props) => {
+    props = mergeProps({ offset: 0.09, segments: 8 }, props)
+
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <Repeat times={props.segments}>
+                {i => (
+                    <g class="segment">
+                        <Motion.path
+                            d="M 94 25 C 94 21.686 96.686 19 100 19 L 100 19 C 103.314 19 106 21.686 106 25 L 106 50 C 106 53.314 103.314 56 100 56 L 100 56 C 96.686 56 94 53.314 94 50 Z"
+                            style={{
+                                transform: 'rotate(' + (360 / props.segments) * i + 'deg)'
+                            }}
+                            animate={{ opacity: [0, 1, 0] }}
+                            transition={{
+                                offset: [0, 0.1, 1],
+                                duration: props.offset * props.segments,
+                                delay: i * props.offset,
+                                repeat: Infinity,
+                            }}
+                            class="bg-secondary p-4"
+                        />
+                    </g>
+                )}
+            </Repeat>
+        </svg>
     )
 }
