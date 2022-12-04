@@ -41,6 +41,9 @@ export default function MotionPage() {
 
             <h2>Hover</h2>
             <MotionHover />
+
+            <h2>Press</h2>
+            <MotionPress />
         </Layout>
     )
 }
@@ -257,3 +260,16 @@ const MotionHover: Component = () => {
         </Motion.div>
     )
 }
+
+
+const MotionPress: Component = () => {
+    return (
+        <Motion.div
+            press={{ scale: 0.9 }}
+            class="bg-secondary p-4"
+        >
+            press=scale: 0.9
+        </Motion.div>
+    )
+}
+
