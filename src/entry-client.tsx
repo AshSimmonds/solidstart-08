@@ -1,5 +1,5 @@
-import { mount, StartClient } from "solid-start/entry-client";
-import { client, queryClient, trpc } from "./utils/trpc";
+import { mount, StartClient } from "solid-start/entry-client"
+import { client, queryClient, trpc } from "./utils/trpc"
 import 'solid-devtools'
 
 mount(
@@ -9,4 +9,4 @@ mount(
         </trpc.Provider>
     ),
     document
-);
+)

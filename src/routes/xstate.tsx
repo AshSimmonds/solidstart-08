@@ -5,6 +5,21 @@ import PageTitle from "~/components/PageTitle"
 // import { counterMachine } from "~/deusex/counterMachine"
 import { counterMachineService } from "~/deusex/counterMachine"
 
+// this causes https://github.com/rlaffers/xstate-ninja/issues/3
+// import { interpret } from 'xstate-ninja'
+
+// const ninjaService = interpret(counterMachineService.machine)
+
+
+// supposed to go in "index" file, maybe
+// import xstateNinja, { LogLevels } from 'xstate-ninja'
+
+// xstateNinja({
+//     enabled: process.env.NODE_ENV !== 'production',
+//     logLevel: LogLevels.debug,
+// })
+
+
 export default function XStatePage() {
 
     const [interactions, setInteractions] = createSignal(0)
