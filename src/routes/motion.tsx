@@ -38,6 +38,9 @@ export default function MotionPage() {
 
             <h2>SVG path drawing (✓ in a circle)</h2>
             <MotionSVGPathDrawing />
+
+            <h2>Hover</h2>
+            <MotionHover />
         </Layout>
     )
 }
@@ -240,5 +243,17 @@ const MotionSVGPathDrawing: Component = (props) => {
                 transition={{ duration: 0.6, delay: 2.4 }}
             />
         </svg>
+    )
+}
+
+
+const MotionHover: Component = () => {
+    return (
+        <Motion.div
+            hover={{ scale: 1.2 }}
+            class="bg-secondary p-4"
+        >
+            hover=scale: 1.2
+        </Motion.div>
     )
 }
