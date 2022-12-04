@@ -14,9 +14,11 @@ export const routeData = () => {
 
             const theResponse = await fetch(theSource)
 
-            const theData = await theResponse.text()
+            const theData = await theResponse.json()
 
             console.log(`saber spacecock routeData theData: ${theData}`)
+
+
 
             return theData
 
@@ -36,10 +38,23 @@ export default function SpaceCockPage() {
             <PageTitle>Space Cockpit | Saber Astronautics</PageTitle>
             <h1>Space Cockpit | Saber Astronautics</h1>
 
+            <h2>Mission Details</h2>
+
+            <section id="xcomblueleft" data-augmented-ui="tr-2-clip-y br-clip b-clip-x bl-2-clip-x l-clip-y border 
+" class="styleme pb-12 pt-0 pl-8 pr-8 mt-12">
+
+                <h3>Operation: {theLore().Name}</h3>
+
+                <div class="bg-accent">
+                    asdf
+                </div>
+
+            </section>
+
             <h2>Source data</h2>
             <A href={theSource}>{theSource}</A>
             <pre>
-                {theLore()}
+                {JSON.stringify(theLore(), null, 4)}
             </pre>
 
         </Layout>

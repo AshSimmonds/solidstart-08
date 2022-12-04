@@ -222,6 +222,11 @@ code {
     color: #73e5ff;
 }
 
+hr {
+    border-top: 1px solid #73e5ff66;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
 
 
 
@@ -324,7 +329,7 @@ code {
 #xcomblueleft {
     /* --aug-clip-tl1: initial; */
     /* --aug-round-tr1: initial; */
-    --aug-clip-br1: initial;
+    /* --aug-clip-br1: initial; */
     /* --aug-round-bl1: initial; */
     --aug-border: initial;
     --aug-inlay: initial;
@@ -338,6 +343,7 @@ code {
     /* --aug-tr1: 10px; */
     --aug-bl1: 30px;
     --aug-b1: 20px;
+    /* --aug-br: 30px; */
     /* color: #cccccc;
     text-align: center; */
     /* padding-left: 30px;
