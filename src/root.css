@@ -336,8 +336,8 @@ hr {
     --aug-border-all: 1px;
     --aug-inlay-all: 2px;
     --aug-border-bg: #026087;
-    --aug-inlay-bg: #026087;
-    --aug-inlay-opacity: 0.06;
+    --aug-inlay-bg: #010f1a;
+    --aug-inlay-opacity: 0.7;
     /* --aug-tl1: 40px; */
     /* --aug-br1: 40px; */
     /* --aug-tr1: 10px; */
