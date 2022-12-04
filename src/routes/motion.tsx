@@ -1,7 +1,7 @@
 import Layout from "~/components/Layout"
 import PageTitle from "~/components/PageTitle"
-import { Component, createSignal } from "solid-js";
-import { Motion } from "@motionone/solid";
+import { Component, createSignal, Show } from "solid-js";
+import { Motion, Presence } from "@motionone/solid";
 
 export default function MotionPage() {
 
@@ -18,6 +18,9 @@ export default function MotionPage() {
 
             <MotionClickToChangeBackground />
 
+            <MotionKeyframes />
+
+            <MotionExit />
 
         </Layout>
     )
@@ -85,5 +88,50 @@ const MotionClickToChangeBackground: Component = () => {
         >
             onClick=setBg("blue")
         </Motion.button>
+    )
+}
+
+
+const MotionKeyframes: Component = () => {
+    const [bg, setBg] = createSignal("red")
+
+    return (
+        <Motion animate={{ x: [0, 100, 50] }}
+            transition={{ x: { offset: [0, .25, 1] } }}
+            class="bg-secondary p-4"
+        >
+            animate=x: 0, 100, 50
+            transition=x: offset: [0, 0.25, 1]
+        </Motion>
+    )
+}
+
+
+
+const MotionExit: Component = () => {
+    const [toggle, setToggle] = createSignal(true)
+
+    return (
+        <div class="container mt-8">
+            <Presence exitBeforeEnter>
+                <Show when={toggle()}>
+                    <Motion.div
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        transition={{ duration: 0.3 }}
+                        class="bg-secondary p-4"
+                    >
+                        initial=opacity: 0, scale: 0.6
+                        animate=opacity: 1, scale: 1
+                        exit=opacity: 0, scale: 0.6
+                        transition=duration: 0.3
+                    </Motion.div>
+                </Show>
+            </Presence>
+            <button onClick={() => setToggle(!toggle())}>
+                Toggle
+            </button>
+        </div>
     )
 }
