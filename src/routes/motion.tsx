@@ -47,6 +47,9 @@ export default function MotionPage() {
 
             <h2>Transition</h2>
             <MotionTransition />
+
+            <h2>Events</h2>
+            <MotionEvents />
         </Layout>
     )
 }
@@ -305,3 +308,24 @@ const MotionTransition: Component = () => {
         </>
     )
 }
+
+
+const MotionEvents: Component = () => {
+    return (
+        <Motion.div
+            class="bg-secondary p-4"
+            animate={{ opacity: [0, 1] }}
+            onMotionStart={({ detail }) => console.log("onMotionStart: ", detail)}
+            onMotionComplete={({ detail }) => console.log("onMotionComplete: ", detail)}
+            onHoverStart={({ detail }) => console.log("onHoverStart: ", detail)}
+            onHoverEnd={({ detail }) => console.log("onHoverEnd: ", detail)}
+            onPressStart={({ detail }) => console.log("onPressStart: ", detail)}
+            onPressEnd={({ detail }) => console.log("onPressEnd: ", detail)}
+            onViewEnter={({ detail }) => console.log("onViewEnter: ", detail)}
+            onViewLeave={({ detail }) => console.log("onViewLeave: ", detail)}
+        >
+            onMotionStart onMotionComplete onHoverStart onHoverEnd onPressStart onPressEnd onViewEnter onViewLeave
+        </Motion.div>
+    )
+}
+
