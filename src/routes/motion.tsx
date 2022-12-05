@@ -240,7 +240,7 @@ const MotionSVGPathDrawing: Component = (props) => {
                 cx="100"
                 cy="100"
                 r="80"
-                pathLength="1"
+                // pathLength="1"
                 animate={draw(1)}
                 transition={{ duration: 0.8, delay: 2 }}
                 class="bg-secondary p-4"
