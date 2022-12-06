@@ -1,29 +1,50 @@
 import { type ParentComponent, Switch, Match, For } from "solid-js"
-import { A, Title, useRouteData } from "solid-start"
+import { A, createRouteData, refetchRouteData, Title, useRouteData } from "solid-start"
 
 
 import server$, { createServerData$ } from "solid-start/server"
+import { createResource } from "solid-js"
 import Layout from "~/components/Layout"
 
 
 export const routeData = () => {
-    return createServerData$(async () => {
+    // return createServerData$(async () => {
 
-        try {
-            const resServer = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+    const theRouteData =
+        createRouteData(async () => {
 
-            const dataServer = await resServer.json()
+            try {
+                const theResponse = await getPokemon()
 
-            const theCoolData = dataServer.abilities[0]
+                const theRaw = await theResponse.json()
 
-            console.log(`theCoolData: ${JSON.stringify(theCoolData, null, 4)}`)
+                const theData = theRaw.abilities[0]
 
-            return theCoolData
+                console.log(`theData: ${JSON.stringify(theData, null, 4)}`)
 
-        } catch (error) {
-            console.error(`qwer: ${error}`)
-        }
-    })
+                return theData
+
+            } catch (error) {
+                console.error(`ERROR: index.tsx routeData: ${error}`)
+            }
+        })
+
+    return theRouteData
+}
+
+
+
+async function getPokemon() {
+    const randomNumber = Math.round(Math.random() * 20) + 1
+    const theUrl = `https://pokeapi.co/api/v2/ability/${randomNumber}`
+
+    console.log(`index.tsx getPokemon() theUrl: ${theUrl}`)
+
+    const thePokemon = await fetch("https://pokeapi.co/api/v2/pokemon/" + randomNumber)
+
+    console.log(`index.tsx getPokemon() thePokemon: ${thePokemon}`)
+
+    return thePokemon
 }
 
 
@@ -163,7 +184,7 @@ const Home: ParentComponent = () => {
     const clientMessage = clientGday('dude')
     const serverMessage = serverGday('sweet')
 
-    const theTestServerData = useRouteData<typeof routeData>()
+    const theTestData = useRouteData<typeof routeData>()
 
     return (
         // <Layout>
@@ -177,8 +198,11 @@ const Home: ParentComponent = () => {
             </div>
 
             <pre>
-                {JSON.stringify(theTestServerData(), null, 4)}
+                {JSON.stringify(theTestData(), null, 4)}
             </pre>
+            <button class="btn btn-primary" onClick={() => {
+                refetchRouteData()
+            }}>refetchRouteData()</button>
 
             <div class="w-full grid gap-8 grid-cols-2 mt-12 mb-8">
                 <For each={buttonList}>
