@@ -16,6 +16,7 @@ const homeDataMachine =
             updated: new Date(),
             idleCount: 0,
             fetchCount: 0,
+            state: 'dunno',
         },
         predictableActionArguments: true,
         id: "homeData",
@@ -28,6 +29,9 @@ const homeDataMachine =
                         target: "fetching",
                     },
                 },
+                after: {
+                    5000: "fetching",
+                },
             },
             fetching: {
                 entry: ["fetchingEntry"],
@@ -36,7 +40,7 @@ const homeDataMachine =
                     id: "fetchData",
                     onDone: [
                         {
-                            target: "idle",
+                            target: "fetched",
                         },
                     ],
                     onError: [
@@ -51,20 +55,39 @@ const homeDataMachine =
                     },
                 },
             },
+            fetched: {
+                entry: ["fetchedEntry"],
+                after: {
+                    5000: {
+                        target: "idle",
+                    },
+                },
+            },
         },
     }, {
         actions: {
             idleEntry: (context, event) => {
+                context.state = 'idle'
                 context.idleCount++
                 context.updates++
                 context.updated = new Date()
-                // console.log(`index.tsx | homeDataMachine | idleEntry | context.updated: `, context.updated)
+                console.log(`idleEntry | context.updated: `, context.updated, ` (`, context.state, `)`)
             },
             fetchingEntry: (context, event) => {
+                context.state = 'fetching'
+
+                refetchRouteData()
+
+                context.updates++
+                context.updated = new Date()
+                console.log(`fetchingEntry | context.updated: `, context.updated, ` (`, context.state, `)`)
+            },
+            fetchedEntry: (context, event) => {
+                context.state = 'fetched'
                 context.fetchCount++
                 context.updates++
                 context.updated = new Date()
-                // console.log(`index.tsx | homeDataMachine | fetchingEntry | context.updated: `, context.updated)
+                console.log(`fetchedEntry | context.updated: `, context.updated, ` (`, context.state, `)`)
             },
         },
         services: {
@@ -77,6 +100,8 @@ const homeDataMachine =
                 const thePokemon = await fetch(theUrl)
 
                 context.data = await thePokemon.json()
+
+                sendBack({ type: "SUCCESS", data: context.data })
 
                 // console.log(`index.tsx fetchDataFunction() context.data: ${JSON.stringify(context.data, null, 4)}`)
 
@@ -117,15 +142,15 @@ export const routeData = () => {
 
 
                 homeDataMachineService.onTransition((newState) => {
-                    // console.log(`index.tsx routeData homeDataMachineService.onTransition() CURRENT: ${homeDataMachineState().value}`)
+                    console.log(`index.tsx routeData homeDataMachineService.onTransition() CURRENT: ${homeDataMachineState().value}`)
 
 
                     setHomeDataMachineState(newState)
 
 
-                    // console.log(`index.tsx routeData homeDataMachineService.onTransition() STATE UPDATED: ${newState.value}`)
+                    console.log(`index.tsx routeData homeDataMachineService.onTransition() STATE UPDATED: ${newState.value}`)
 
-                    // console.log(`index.tsx | routeData | homeDataMachineService.onTransition | homeDataMachineState.context.updated: `, homeDataMachineState().context.updated)
+                    console.log(`index.tsx | routeData | homeDataMachineService.onTransition | homeDataMachineState.context.updated: `, homeDataMachineState().context.updated)
 
                 })
 
@@ -179,8 +204,9 @@ const Home: ParentComponent = () => {
 
     // const [machineUpdated, setMachineUpdated] = createSignal(new Date())
 
-    const theTestData = useRouteData<typeof routeData>()
+    const theTestObject = useRouteData<typeof routeData>()
 
+    // const theTestData = useRouteData<typeof routeData>()?.context?.data
 
     return (
         // <Layout>
@@ -193,7 +219,7 @@ const Home: ParentComponent = () => {
                 <img src={`/moonlogo_small.png`} alt="Blue Dwarf Space logo" class="mx-auto w-full sm:w-1/3 md:w-2/3" />
             </div>
 
-            <div class="alert alert-info">Updated: <code>{theTestData()?.context.updated.toLocaleDateString('en-AU', {
+            <div class="alert alert-info">State: <code>{theTestObject()?.value.toString()}</code> Updated: <code>{theTestObject()?.context.updated.toLocaleDateString('en-AU', {
                 day: '2-digit',
                 month: 'short',
                 year: '2-digit',
@@ -204,12 +230,12 @@ const Home: ParentComponent = () => {
             })}</code>
 
                 <button class="btn btn-primary" onClick={() => {
-                    refetchRouteData()
+                    
                 }}>refetchRouteData()</button>
 
             </div>
             <pre>
-                {JSON.stringify(theTestData()?.context.data, null, 4)}
+                {JSON.stringify(theTestObject()?.context.data.flavor_text_entries[0], null, 4)}
             </pre>
 
             <div class="w-full grid gap-8 grid-cols-2 mt-12 mb-8">
