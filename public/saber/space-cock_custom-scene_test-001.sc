@@ -1,6 +1,6 @@
 {
-  "Id": "1eb657d2-facb-4130-910f-6485cdb0b75e",
-  "Name": "test",
+  "Id": "67eef3da-4b06-45a5-a75c-4f8ffb4eb006",
+  "Name": "zxcvzxcv",
   "Source": "SC",
   "ActiveAssetListIndex": 0,
   "AssetLists": [
@@ -26,15 +26,18 @@
       ],
       "HiddenSatIds": [],
       "Sensors": [
-        "CG041"
+        "CG001",
+        "CG002"
       ],
-      "HiddenSensorIds": []
+      "HiddenSensorIds": [
+        "CG001"
+      ]
     }
   ],
   "UserSatData": [],
   "UserSensorData": [
     {
-      "Id": "CG041",
+      "Id": "CG001",
       "Name": "LC-1A - New Zealand pad LC-1A",
       "Nickname": "river selfie",
       "CountryCode": "NZ",
@@ -49,10 +52,27 @@
       "AzimuthMin": 0.0,
       "ElevationMax": 90.0,
       "ElevationMin": 0.0
+    },
+    {
+      "Id": "CG002",
+      "Name": "ARGHKANSAS",
+      "Nickname": "trey's",
+      "CountryCode": "US",
+      "ThreatCategory": 2,
+      "IsCustom": true,
+      "Lat": 34.799999237060547,
+      "Lon": -92.199996948242188,
+      "Altitude": 0.0,
+      "MinRange": 0.0,
+      "MaxRange": 5000.0,
+      "AzimuthMax": 360.0,
+      "AzimuthMin": 0.0,
+      "ElevationMax": 86.0,
+      "ElevationMin": 5.0
     }
   ],
   "FocusedSat": null,
-  "FocusedSensor": "CG041",
+  "FocusedSensor": "CG002",
   "Visuals": [
     {
       "ToolType": "Orbit",
@@ -179,109 +199,13 @@
       "InvolvedSceneObjectIds": []
     },
     {
-      "ToolType": "Distance",
-      "InvolvedSceneObjectIds": [
-        "202",
-        "CG041"
-      ]
-    },
-    {
-      "ToolType": "Altitude",
-      "InvolvedSceneObjectIds": [
-        "202",
-        "CG041"
-      ]
-    },
-    {
       "ToolType": "SensorViewCone",
       "InvolvedSceneObjectIds": [
-        "CG041"
-      ]
-    },
-    {
-      "ToolType": "MoonOrbit",
-      "InvolvedSceneObjectIds": [
-        null
-      ]
-    },
-    {
-      "ToolType": "LagragianPointMarker",
-      "InvolvedSceneObjectIds": []
-    },
-    {
-      "ToolType": "LagragianPointMarker",
-      "InvolvedSceneObjectIds": []
-    },
-    {
-      "ToolType": "LagragianPointMarker",
-      "InvolvedSceneObjectIds": []
-    },
-    {
-      "ToolType": "LagragianPointMarker",
-      "InvolvedSceneObjectIds": []
-    },
-    {
-      "ToolType": "LagragianPointMarker",
-      "InvolvedSceneObjectIds": []
-    },
-    {
-      "ToolType": "UmbraCone",
-      "InvolvedSceneObjectIds": []
-    },
-    {
-      "ToolType": "PenumbraCone",
-      "InvolvedSceneObjectIds": []
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "33462"
-      ]
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "33453"
-      ]
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "33446"
-      ]
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "33401"
-      ]
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "33383"
-      ]
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "33396"
-      ]
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "33395"
-      ]
-    },
-    {
-      "ToolType": "HUD",
-      "InvolvedSceneObjectIds": [
-        "221"
+        "CG002"
       ]
     }
   ],
-  "SimulationTime": "2022-12-09T23:27:21.961Z",
+  "SimulationTime": "2022-12-11T21:44:22.771Z",
   "SimulationSpeed": 100.0,
   "ScenarioEndTime": null,
   "Status": null
