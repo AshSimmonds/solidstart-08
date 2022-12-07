@@ -11,7 +11,7 @@ const homeDataMachine =
     /** @xstate-layout N4IgpgJg5mDOIC5QAsD2BbMARAhgFxwDoBLCAGzAGIAxAUQBUBhACQG0AGAXUVAAdVYxPMVQA7HiAAeiACwBGAMyEAbHOUBWAOwAmABwL1ATi26ANCACeiALSGVuzbqcLtcx-PW6Avl-NpMuASEAGZgeADGyMSiUJQQYmAkogBuqADWiaERyIE4HNxIIPyCwmIS0ggKCnbq1Q4ytdqaBnLq5lYIMuyEmjKGqmqOrp4yPn4Y2PhEWZHRsWAATguoC4S8ZPjBK+ghYZG5+RLFQiLihRVVNXW9jc3qre2Ihtoqjp6e2oa6TW5jIP6TIIzKIxSiMACCADlGLQADKHQrHUpnUAXaqEWpfG4uO4PSyIOQyGQqdiadRGL6EhS6dQ+XwgUSoCBwCQA3JHAQnMrnWSEdjfGQKLpqQz8uTaGSPBC2XQqZS6djsQwGbTadRK7z0tlTEjkMAckqncqIZQKbraZSadgyXTPS3quRSxSaQiimQaGl9dSq75-bVAvYgqAGrkoqSIb18gVC9gisUSqW6OR8gyaRwKOQK9XKOleIA */
     createMachine({
         context: {
-            data: {},
+            data: {} as any,
             updates: 0,
             updated: new Date(),
             idleCount: 0,
@@ -235,7 +235,7 @@ const Home: ParentComponent = () => {
 
             </div>
             <pre>
-                {JSON.stringify(theTestObject()?.context.data.flavor_text_entries[0], null, 4)}
+                { JSON.stringify(theTestObject()?.context.data.flavor_text_entries[0], null, 4) }
             </pre>
 
             <div class="w-full grid gap-8 grid-cols-2 mt-12 mb-8">
