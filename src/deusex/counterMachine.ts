@@ -50,27 +50,41 @@ export const counterMachine =
     }, {
         actions: {
             incrementCounter: (context, event) => {
+                console.log(`counterMachine.ts incrementCounter event: ${JSON.stringify(event)} `);
+
+                console.log(`counterMachine.ts incrementCounter context: ${JSON.stringify(context)} `);
+    
                 context.count++;
                 context.incrementCount++;
-                console.log(`event: ${JSON.stringify(event)} context: ${JSON.stringify(context)}`);
             },
             decrementCounter: (context, event) => {
+                console.log(`counterMachine.ts decrementCounter event: ${JSON.stringify(event)} `);
+
+                console.log(`counterMachine.ts decrementCounter context: ${JSON.stringify(context)} `);
+
                 context.count--;
                 context.decrementCount++;
-                console.log(`event: ${JSON.stringify(event)} context: ${JSON.stringify(context)}`);
             },
             setDisabled: (context, event) => {
+                console.log(`counterMachine.ts setDisabled event: ${JSON.stringify(event)} `);
+
+                console.log(`counterMachine.ts setDisabled context: ${JSON.stringify(context)} `);
+
                 context.disabledCount++;
-                console.log(`event: ${JSON.stringify(event)} context: ${JSON.stringify(context)}`);
             },
             setEnabled: (context, event) => {
+                console.log(`counterMachine.ts setEnabled event: ${JSON.stringify(event)} `);
+
+                console.log(`counterMachine.ts setEnabled context: ${JSON.stringify(context)} `);
+
                 context.enabledCount++;
-                console.log(`event: ${JSON.stringify(event)} context: ${JSON.stringify(context)}`);
             },
         },
         services: {
             toggleEnabledDisabledFunction: (context, event) => (sendBack) => {
-                console.log(`event: ${JSON.stringify(event)} context: ${JSON.stringify(context)}`);
+                console.log(`counterMachine.ts toggleEnabledDisabledFunction event: ${JSON.stringify(event)} `);
+
+                console.log(`counterMachine.ts toggleEnabledDisabledFunction context: ${JSON.stringify(context)} `);
 
             },
         },
